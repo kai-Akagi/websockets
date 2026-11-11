@@ -1,0 +1,14 @@
+com\demo\websocketserver\model\EntidadEntrante.class
+com\demo\websocketserver\config\WebSocketConfig.class
+com\demo\websocketserver\model\Mensaje.class
+com\demo\websocketserver\config\NombreHandshakeInterceptor.class
+com\demo\websocketserver\config\EventosWebSocket.class
+com\demo\websocketserver\model\EntidadEnviada.class
+com\demo\websocketserver\WebsocketserverApplication.class
+com\demo\websocketserver\config\NombreHandshakeHandler.class
+com\demo\websocketserver\model\MensajeEntrante.class
+com\demo\websocketserver\service\RegistroUsuarios.class
+com\demo\websocketserver\config\UsuarioPrincipal.class
+com\demo\websocketserver\controller\MensajeController.class
+com\demo\websocketserver\controller\UsuarioController.class
+com\demo\websocketserver\model\Alumno.class

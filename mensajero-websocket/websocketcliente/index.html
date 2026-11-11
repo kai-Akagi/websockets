@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajero Web Socket</title>
+    <!-- Add Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <!-- Add StompJs for WebSocket in SpringBoot-->
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.js"></script>
+    <!-- Add script for JS file -->
+    <script src="index.js"></script>
+    <style>
+        #ULMensajes { height: 300px; overflow-y: auto; }
+        .usuario-item { cursor: pointer; }
+        .tabla-contenedor { max-height: 260px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+<div class="container my-3">
+    <h3 class="mb-3">Mensajero instantáneo</h3>
+
+    <!-- Pantalla de entrada -->
+    <div id="seccionLogin" class="card">
+        <div class="card-body">
+            <h5 class="card-title">Entrar al mensajero</h5>
+            <form id="formLogin">
+                <input id="txtUsuario" type="text" class="form-control mb-2" placeholder="Tu nombre de usuario" maxlength="20" autocomplete="off">
+                <button id="btnEntrar" type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+            <div id="loginError" class="text-danger small mt-2"></div>
+        </div>
+    </div>
+
+    <!-- Mensajero -->
+    <div id="seccionApp" class="row d-none">
+        <!-- Usuarios conectados -->
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    Usuarios conectados
+                    <span id="badgeUsuarios" class="badge badge-secondary">0</span>
+                </div>
+                <ul id="ULUsuarios" class="list-group list-group-flush"></ul>
+                <div class="card-footer small text-muted">Haz clic en un usuario para enviarle algo solo a él.</div>
+            </div>
+            <button id="btnSalir" class="btn btn-outline-secondary btn-sm mt-2">Salir</button>
+        </div>
+
+        <div class="col-md-9">
+            <div class="alert alert-info py-2">
+                Conectado como <strong id="miNombre"></strong> &middot;
+                Destinatario: <strong id="destinoActual">Todos</strong>
+            </div>
+
+            <!-- Chat -->
+            <div class="card mb-3">
+                <div class="card-header">Mensajes</div>
+                <ul id="ULMensajes" class="list-group list-group-flush"></ul>
+                <div class="card-body">
+                    <form id="formMensaje" class="form-row">
+                        <div class="col">
+                            <input id="txtMensaje" type="text" class="form-control" placeholder="Escribe un mensaje" maxlength="500" autocomplete="off">
+                        </div>
+                        <div class="col-auto">
+                            <button id="btnEnviar" type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Entidad: Alumno -->
+            <div class="card mb-3">
+                <div class="card-header">Alumnos (entidad enviada en JSON)</div>
+                <div class="card-body">
+                    <form id="formAlumno">
+                        <div class="form-row">
+                            <div class="col-md-3 mb-2"><input id="txtMatricula" type="text" class="form-control" placeholder="Matrícula" maxlength="60"></div>
+                            <div class="col-md-4 mb-2"><input id="txtNombreAlumno" type="text" class="form-control" placeholder="Nombre" maxlength="60"></div>
+                            <div class="col-md-3 mb-2"><input id="txtCarrera" type="text" class="form-control" placeholder="Carrera" maxlength="60"></div>
+                            <div class="col-md-2 mb-2"><input id="txtSemestre" type="number" min="1" max="12" class="form-control" placeholder="Sem."></div>
+                        </div>
+                        <button id="btnEnviarAlumno" type="submit" class="btn btn-success">Enviar alumno</button>
+                    </form>
+                    <div id="alumnoError" class="text-danger small mt-2"></div>
+                </div>
+                <div class="tabla-contenedor">
+                    <table id="tablaAlumnos" class="table table-sm table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th>Hora</th><th>De</th><th>Para</th><th>Matrícula</th><th>Nombre</th><th>Carrera</th><th>Sem.</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbodyAlumnos"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
